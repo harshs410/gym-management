@@ -23,8 +23,16 @@ export async function middleware(request: NextRequest) {
   try {
     const { payload } = await jwtVerify(token, secret)
     
+
+
+
     // Check role-based access
     const path = request.nextUrl.pathname
+
+    // Allow members to access member routes
+    if (path.startsWith('/member') && payload.role === 'MEMBER') {
+      return NextResponse.next()
+    }
 
     if (path.startsWith('/dashboard') && payload.role !== 'ADMIN') {
       return NextResponse.redirect(new URL('/login', request.url))
