@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  thrust_gym_db:
+    image: postgres:15-alpine
+    container_name: thrust_gym_db
+    environment:
+      POSTGRES_USER: thrust_user
+      POSTGRES_PASSWORD: thrust_pass_2024
+      POSTGRES_DB: thrust_gym_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  thrust_gym_redis:
+    image: redis:7-alpine
+    container_name: thrust_gym_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:

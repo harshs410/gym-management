@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  TRAINER
+  MEMBER
+}
+
+enum MembershipTier {
+  BASIC
+  PREMIUM
+  VIP
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum FitnessLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  password      String
+  role          Role
+  name          String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relationships
+  member        Member?
+  trainer       Trainer?
+}
+
+model Member {
+  id              String         @id @default(uuid())
+  userId          String         @unique
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  phone           String?
+  age             Int?
+  gender          Gender?
+  membershipTier  MembershipTier @default(BASIC)
+  joinedAt        DateTime       @default(now())
+  expiresAt       DateTime
+  isActive        Boolean        @default(true)
+  isCheckedIn     Boolean        @default(false)
+  lastCheckedIn   DateTime?
+  
+  // Relationships
+  workoutPlans    WorkoutPlan[]
+  checkIns        CheckIn[]
+  assignedTrainer Trainer?       @relation(fields: [trainerId], references: [id])
+  trainerId       String?
+  
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  
+  @@index([isActive])
+  @@index([trainerId])
+}
+
+model Trainer {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  specialization String?
+  phone          String?
+  
+  // Relationships
+  members        Member[]
+  workoutPlans   WorkoutPlan[]
+  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model WorkoutPlan {
+  id          String   @id @default(uuid())
+  memberId    String
+  member      Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  trainerId   String
+  trainer     Trainer  @relation(fields: [trainerId], references: [id])
+  
+  title       String
+  description String?
+  plan        Json     // AI-generated workout plan stored as JSON
+  weeks       Int      @default(4)
+  fitnessLevel FitnessLevel
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([memberId])
+  @@index([trainerId])
+}
+
+model CheckIn {
+  id          String   @id @default(uuid())
+  memberId    String
+  member      Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  
+  checkedInAt DateTime @default(now())
+  checkedOutAt DateTime?
+  
+  @@index([memberId])
+  @@index([checkedInAt])
+}
+
+model GymSettings {
+  id              String   @id @default(uuid())
+  maxCapacity     Int      @default(100)
+  currentCapacity Int      @default(0)
+  updatedAt       DateTime @updatedAt
+}
