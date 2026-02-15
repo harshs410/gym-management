@@ -17,6 +17,7 @@
     "@anthropic-ai/sdk": "^0.74.0",
     "@prisma/client": "^5.7.1",
     "@tanstack/react-virtual": "^3.0.1",
+    "bcrypt": "^6.0.0",
     "bcryptjs": "^2.4.3",
     "ioredis": "^5.3.2",
     "jose": "^5.1.3",
