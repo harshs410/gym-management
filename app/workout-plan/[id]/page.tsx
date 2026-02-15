@@ -44,6 +44,7 @@ interface WorkoutPlan {
 
 export default function WorkoutPlanViewPage() {
   const params = useParams()
+  const planId = params?.id as string
   const router = useRouter()
   const [plan, setPlan] = useState<WorkoutPlan | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -57,7 +58,7 @@ export default function WorkoutPlanViewPage() {
     try {
       // This would need a separate GET endpoint for individual plans
       // For now, we'll use the member's plans endpoint
-      const response = await fetch(`/api/workout-plan?planId=${params.id}`)
+      const response = await fetch(`/api/workout-plan?planId=${planId}`)
       
       // Temporary: Just show success message
       setIsLoading(false)

@@ -7,6 +7,7 @@ import MemberForm from '@/components/MemberForm'
 export default function EditMemberPage() {
   const router = useRouter()
   const params = useParams()
+  const memberId = params?.id as string
   const [member, setMember] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -20,7 +21,7 @@ const fetchMember = async () => {
     const data = await response.json()
     
     if (response.ok) {
-      const foundMember = data.members.find((m: any) => m.id === params.id)
+      const foundMember = data.members.find((m: any) => m.id === memberId)
       if (foundMember) {
         setMember(foundMember)
       } else {
