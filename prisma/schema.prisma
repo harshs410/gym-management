@@ -35,7 +35,7 @@ model User {
   id            String   @id @default(uuid())
   email         String   @unique
   password      String
-  role          Role
+  role          String   @default("MEMBER") 
   name          String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -52,8 +52,8 @@ model Member {
   
   phone           String?
   age             Int?
-  gender          Gender?
-  membershipTier  MembershipTier @default(BASIC)
+  gender            String?
+  membershipTier    String         @default("BASIC")
   joinedAt        DateTime       @default(now())
   expiresAt       DateTime
   isActive        Boolean        @default(true)
@@ -100,7 +100,7 @@ model WorkoutPlan {
   description String?
   plan        Json     // AI-generated workout plan stored as JSON
   weeks       Int      @default(4)
-  fitnessLevel FitnessLevel
+  fitnessLevel  String
   
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
