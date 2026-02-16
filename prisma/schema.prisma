@@ -7,29 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  ADMIN
-  TRAINER
-  MEMBER
-}
-
-enum MembershipTier {
-  BASIC
-  PREMIUM
-  VIP
-}
-
-enum Gender {
-  MALE
-  FEMALE
-  OTHER
-}
-
-enum FitnessLevel {
-  BEGINNER
-  INTERMEDIATE
-  ADVANCED
-}
 
 model User {
   id            String   @id @default(uuid())
@@ -79,7 +56,6 @@ model Trainer {
   phone          String?
   
   // Relationships
-  members        Member[]
   workoutPlans   WorkoutPlan[]
   
   createdAt      DateTime @default(now())
