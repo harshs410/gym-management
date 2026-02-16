@@ -142,7 +142,7 @@ export default function CreateWorkoutPlanPage() {
               <Dumbbell className="w-8 h-8 text-red-600" />
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">AI Workout Plan Generator</h1>
-                <p className="text-sm text-gray-600">Powered by OpenAI GPT-4</p>
+                <p className="text-sm text-gray-600">Powered by Anthropic's claude</p>
               </div>
             </div>
             

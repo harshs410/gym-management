@@ -173,10 +173,10 @@ export default async function DashboardPage() {
             🎉 Phase 4 Complete!
           </h3>
           <p className="text-purple-800 mb-3">
-            AI Workout Plan Generator is live! Create personalized 4-week training programs using OpenAI GPT-4.
+            AI Workout Plan Generator is live! Create personalized 4-week training programs using Anthropic's claude.
           </p>
           <div className="grid grid-cols-2 gap-2 text-sm text-purple-700">
-            <p>✅ OpenAI GPT-4 integration</p>
+            <p>✅ Anthropic's claude integration</p>
             <p>✅ Member profile form</p>
             <p>✅ 4-week progressive plans</p>
             <p>✅ Exercises, sets, reps</p>
