@@ -384,7 +384,7 @@ This project demonstrates:
 - ✅ Professional-grade security
 - ✅ Complete documentation
 
-**Ready for ₹12 LPA+ roles!** 🚀
+
 
 ---
 
