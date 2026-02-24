@@ -2,7 +2,7 @@
 ## Project Context Document for Claude
 
 **Date Created**: February 7, 2026  
-**Purpose**: Portfolio project to demonstrate technical capabilities for ₹12 LPA salary expectation
+**Purpose**: Portfolio project to demonstrate technical capabilities
 
 ---
 
